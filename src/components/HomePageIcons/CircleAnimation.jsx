@@ -1,25 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FaWhatsapp, FaInstagram } from 'react-icons/fa';
 import { RiLinkedinLine, RiFacebookLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import { FiGithub } from "react-icons/fi";
+import profileImage from '../../assets/profile-image2.jpg'
+
 
 const CircleAnimation = () => {
   return (
-    <div>
-      <div className='relative h-80 w-80 border-4 border-purple-900 rounded-full flex items-center justify-center'>
-        hello
+    <div className='flex flex-col justify-center items-center mb-8 sm:mb-0'>
+      <div className='relative w-40 h-40 sm:h-80 sm:w-80 border-4 border-gray-800 rounded-full flex items-center justify-center overflow-hidden'>
+        <img src={profileImage} className='select-none object-fill translate-y-16' alt="" />
       </div>
-      <div className='w-full flex justify-around mt-4'>
-        <Link to={'#'} className='w-12 h-12 flex justify-center text-2xl rounded-lg shadow-lg items-center bg-purple-900 hover:bg-purple-950 text-white'>
+      <div className='links w-full flex justify-evenly sm:justify-around mt-4'>
+        <Link to={'https://www.instagram.com/imbharat001/'} id='insta' className='w-10 h-10 sm:w-12 sm:h-12 flex justify-center text-xl sm:text-2xl rounded-full shadow-lg items-center bg-gray-800 hover:bg-purple-900 text-white'>
           <FaInstagram />
         </Link>
-        <Link to={'#'} className='w-12 h-12 flex justify-center text-2xl rounded-lg shadow-lg items-center bg-purple-900 hover:bg-purple-950 text-white'>
-          <FaWhatsapp />
+        <Link to={'https://github.com/Bharat8533'} id="whatsapp" className='w-10 h-10 sm:w-12 sm:h-12 flex justify-center text-xl sm:text-2xl rounded-full shadow-lg items-center bg-gray-800 hover:bg-purple-900 text-white'>
+        <FiGithub />
         </Link>
-        <Link to={'#'} className='w-12 h-12 flex justify-center text-2xl rounded-lg shadow-lg items-center bg-purple-900 hover:bg-purple-950 text-white'>
+        <Link to={'www.linkedin.com/in/bharat-s8533'} className='w-10 h-10 sm:w-12 sm:h-12 flex justify-center text-xl sm:text-2xl rounded-full shadow-lg items-center bg-gray-800 hover:bg-purple-900 text-white'>
           <RiLinkedinLine />
         </Link>
-        <Link to={'#'} className='w-12 h-12 flex justify-center text-2xl rounded-lg shadow-lg items-center bg-purple-900 hover:bg-purple-950 text-white'>
+        <Link to={'https://www.facebook.com/profile.php?id=100028008606694'} className='w-10 h-10 sm:w-12 sm:h-12 flex justify-center text-xl sm:text-2xl rounded-full shadow-lg items-center bg-gray-800 hover:bg-purple-900 text-white'>
           <RiFacebookLine />
         </Link>
       </div>

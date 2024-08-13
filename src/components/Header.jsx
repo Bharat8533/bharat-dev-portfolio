@@ -14,25 +14,21 @@ function Header() {
       url : '/about'
     },
     {
-      link: 'Services',
-      url : '/services'
-    },
-    {
       link: 'Projects',
       url : '/projects'
     }
   ]
 
   return (
-    <nav className="bg-white w-full border-b border-gray-200">
+    <nav className="bg-white w-full border-b border-gray-200" >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto h-16">
         <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="logo self-center text-2xl font-semibold whitespace-nowrap tracking-tighter">Bharat</span>
         </Link>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <button type="button" className="text-white w-10 h-10 bg-purple-900 hover:bg-purple-800 focus:outline-none font-medium rounded-full flex items-center justify-center text-2xl ">
+        <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <Link to={'https://wa.me/917417216376?text=Hello%2C%20test'} className="text-white w-8 sm:w-10 h-8 sm:h-10 bg-gray-800 hover:bg-purple-900 focus:outline-none font-medium rounded-full flex items-center justify-center text-xl sm:text-2xl ">
             <FaWhatsapp />
-          </button>
+          </Link>
           <button
             data-collapse-toggle="navbar-sticky"
             type="button"
@@ -55,7 +51,7 @@ function Header() {
                   <li key={index} className={({ isActive }) => `h-full flex justify-center items-center ${isActive ? 'md:border-b border-purple-900' : ''}`}>
                     <NavLink
                       to={link.url}
-                      className={({ isActive }) => `block py-2 px-3 md:p-0 ${isActive ? 'text-white md:text-purple-900' : 'text-gray-900 md:hover:text-purple-900'}`}
+                      className={({ isActive }) => `block uppercase text-sm tracking-widest py-2 px-3 md:p-0 ${isActive ? 'text-white md:text-purple-900' : 'text-gray-900 md:hover:text-purple-900'}`}
                       aria-current="page"
                     >
                       {link.link}
