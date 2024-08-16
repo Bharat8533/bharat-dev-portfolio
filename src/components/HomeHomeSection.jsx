@@ -50,7 +50,7 @@ function HomeHomeSection() {
   }
 
   return (
-    <div className='relative w-full h-[calc(100dvh-5rem)] pt-4 sm:pt-16'>
+    <div className='relative w-full h-[calc(100dvh-4.2rem)] pt-4 sm:pt-16'>
       <div className='max-w-screen-xl mx-auto h-full'>
         <div className='flex flex-wrap'>
           <div className='basis-full sm:basis-2/3 order-2 sm:order-1 flex justify-center sm:justify-start flex-col items-center sm:items-start'>
@@ -66,7 +66,7 @@ function HomeHomeSection() {
                 }}
               /> Developer
             </h1>
-            <p className='mt-4 w-2/3 text-gray-800 text-center sm:text-justify'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas placeat veritatis pariatur est blanditiis quos neque nihil officiis maiores facilis?</p>
+            <p className='mt-4 w-2/3 text-gray-800 text-center sm:text-justify'>I'm a software developer skilled in front-end and back-end technologies, focused on creating dynamic web experiences. Let’s connect and turn your ideas into reality!</p>
             <div className='w-full flex flex-wrap justify-center sm:justify-start items-center sm:items-start gap-4 mt-8 sm:mt-16'>
               <button type='button' onClick={handleCall} className='w-2/3 sm:w-auto px-4 py-2 bg-gray-800 hover:bg-gray-900 duration-200 text-white rounded-lg font-bold shadow-xl text-center' id='get-in-touch'>Get in Touch</button>
               <button type='button' onClick={handleResumeDownload} className='w-2/3 sm:w-auto px-8 py-2 bg-purple-900 hover:bg-purple-950 duration-200 text-white rounded-lg font-bold shadow-xl text-center' id='download-resume' download={'BharatSharma_Resume  '}>Download Resume</button>

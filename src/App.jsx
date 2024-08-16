@@ -7,11 +7,12 @@ function App() {
   console.log(import.meta.env.VITE_API);
   return (
     <>
-      <Header />
-      <main>
-        <Outlet />
-      </main>
-
+      <div>
+        <Header />
+        <main>
+          <Outlet />
+        </main>
+      </div>
     </>
   );
 }

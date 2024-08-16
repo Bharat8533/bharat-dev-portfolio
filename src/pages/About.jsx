@@ -61,11 +61,12 @@ function About() {
   ];
 
   return <>
-    <div className='relative bg-white w-full h-full sm:h-[calc(100dvh-5rem)] pt-4 pb-4'>
+    <div className='relative w-full h-full sm:h-[calc(100dvh-4.6rem)] pt-4 pb-4'>
       <div className='max-w-screen-xl mx-auto h-full mt-6 flex flex-col justify-center sm:justify-start items-center sm:items-start'>
         <h1 className='text-3xl sm:text-7xl mt-4 font-bold uppercase leading-10 tracking-wide' style={{ fontFamily: "DM Serif Display" }}>About me</h1>
-        <p className='mt-4 sm:mt-8 w-full sm:w-4/5 text-justify px-4 sm:px-0 sm:ps-4 sm:border-s-8 sm:border-purple-900 py-2'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat voluptas suscipit possimus, sed laborum voluptatum enim. Ea unde eius perferendis laboriosam? Ab voluptate vel illum libero quaerat eligendi, iusto nisi eveniet maiores architecto, accusantium tempore nemo autem porro, consequatur illo accusamus distinctio praesentium. Cumque suscipit eligendi neque doloribus aut culpa omnis minus iste quas iusto pariatur quos eius illo, exercitationem ad vero dolore. Dignissimos aspernatur velit dolorum non sequi facilis possimus reprehenderit saepe qui soluta. Corrupti, vitae repellendus. Laudantium nostrum corrupti tempore libero deleniti veritatis, iste cupiditate et eligendi tenetur aperiam consequatur debitis eveniet ea minima facere? Fuga, a quod?</p>
-        <h2 className='mt-4 text-2xl font-semibold'>Skills</h2>
+        <p className='mt-4 sm:mt-8 w-full sm:w-4/5 text-justify px-4 sm:px-0 sm:ps-4 sm:border-s-8 sm:border-purple-900 py-2'>    Hi, I'm Bharat Sharma. With over a year of experience as a software developer, I specialize in crafting dynamic and responsive web applications. My expertise spans both front-end and back-end development, enabling me to create seamless user experiences and tackle complex problems. I am passionate about continuous learning and thrive in collaborative environments to turn innovative ideas into reality.
+        </p>
+        <h2 className='mt-12 text-2xl font-semibold'>Skills</h2>
         <div className='w-full flex flex-wrap gap-4 mt-4 px-4 sm:px-0'>
           {
             skills.map((skill, index) => {

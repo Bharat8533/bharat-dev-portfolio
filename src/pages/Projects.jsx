@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import '../components/projects.css'
 import horeca from '../assets/projects/horeca.png'
 import githubFinder from '../assets/projects/githubFinder.png'
@@ -58,7 +58,7 @@ function Projects() {
   ]
   return (
     <>
-      <div className='w-full h-[calc(100dvh-7rem)] px-2 sm:px-28 py-4'>
+      <div className='w-full h-[calc(100dvh-7rem)] px-2 sm:px-28 py-4 '>
         <div className='content grid grid-cols-1 sm:grid-cols-3 h-full gap-2 sm:-ms-8'>
           {
             projects.map((project, index) => {
@@ -71,8 +71,29 @@ function Projects() {
   )
 }
 
-function Card({ project, index }) {
-  const [visibility, setVisibility] = useState(false)
+const Card = ({ project, index }) => {
+  const [visibility, setVisibility] = useState(false);
+  const [transform, setTransform] = useState('rotateX(0deg) rotateY(0deg)');
+  const containerRef = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (containerRef.current) {
+      const { clientX: mouseX, clientY: mouseY } = e;
+      const { offsetWidth: width, offsetHeight: height } = containerRef.current;
+      const { left, top } = containerRef.current.getBoundingClientRect();
+
+      const centerX = left + width / 2;
+      const centerY = top + height / 2;
+
+      const deltaX = (mouseX - centerX) / (width / 2);
+      const deltaY = (mouseY - centerY) / (height / 2);
+
+      const rotateX = -deltaY * 10; // Adjust rotation strength
+      const rotateY = deltaX * 10; // Adjust rotation strength
+
+      setTransform(`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`);
+    }
+  };
 
   const bgColors = {
     html: 'bg-[#ff4b00]',
@@ -89,32 +110,45 @@ function Card({ project, index }) {
     github: 'bg-[#000000]',
     'VS Code': 'bg-[#2196f3]'
   }
-
-  return (<>
-    <div className='relative p-1 h-fit mb-4 sm:mb-0 sm:h-full w-full border border-gray-900'>
-      <div onMouseOver={() => setVisibility(true)} onMouseLeave={() => setVisibility(false)} className='flex flex-col gap-2 rounded-sm p-2 h-full'>
+  
+  return (
+    <div
+      ref={containerRef}
+      className='card relative p-1 h-fit mb-4 sm:mb-0 sm:h-full w-full border border-gray-900 parallax-container'
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setTransform('rotateX(0deg) rotateY(0deg)')}
+      
+    >
+      <div
+        onMouseOver={() => setVisibility(true)}
+        onMouseLeave={() => setVisibility(false)}
+        className='flex flex-col gap-2 rounded-sm p-2 h-full parallax-content'
+        style={{ transform }}
+      >
         <h2 className='font-bold'><span>{index + 1}. </span>{project.name}</h2>
         <p className='text-xs text-gray-700 text-justify'>{project.desc}</p>
         <p className='text-xs'>
           <div className='flex gap-2 mt-2 flex-wrap'>
-            {
-              project.skills.map((skill, index) => {
+            {project.skills.map((skill, index) => {
                 return <div key={index} className={`text-white uppercase px-2 rounded-sm text-[10px] ${bgColors[skill]}`}>{skill}</div>
-              })
-            }
+              })}
           </div>
         </p>
         <div className='flex justify-end items-end h-full'>
-          <Link to={project.url} className='w-6 h-6 border border-gray-800 rounded-full flex justify-center items-center'><MdArrowOutward className='text-xs' /></Link>
+          <Link to={project.url} className='w-6 h-6 border border-gray-800 rounded-full flex justify-center items-center'>
+            <MdArrowOutward className='text-xs' />
+          </Link>
         </div>
       </div>
-      <div onMouseOver={() => setVisibility(true)} onMouseLeave={() => setVisibility(false)}  className={`duration-500 absolute top-1 right-1 w-4/5 h-auto bg-slate-700 z-50 ${visibility ? 'opacity-100' : 'opacity-0'}`}>
-          <img src={project.image} className='h-full w-full object-cover' alt={project.name} />
+      <div
+        onMouseOver={() => setVisibility(true)}
+        onMouseLeave={() => setVisibility(false)}
+        className={`duration-500 absolute top-1 right-1 w-4/5 h-auto bg-slate-700 z-50 ${visibility ? 'opacity-100' : 'opacity-0'}`}
+      >
+        <img src={project.image} className='h-full w-full object-cover' alt={project.name} />
       </div>
     </div>
-  </>
-  )
-}
+  );
+};
 
-
-export default Projects
+export default Projects;
