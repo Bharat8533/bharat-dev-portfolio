@@ -51,6 +51,7 @@ function Header() {
                   <li key={index} className={({ isActive }) => `h-full flex justify-center items-center ${isActive ? 'md:border-b border-purple-900' : ''}`}>
                     <NavLink
                       to={link.url}
+                      onClick={(e) => {setDispaly(!display)}}
                       className={({ isActive }) => `block uppercase text-sm tracking-widest py-2 px-3 md:p-0 ${isActive ? 'text-purple-900' : 'text-gray-900 md:hover:text-purple-900'}`}
                       aria-current="page"
                     >
