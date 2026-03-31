@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Projects from './pages/Projects'
 import Services from './pages/Services'
+import Test from './pages/Test.jsx';
 
 const routes = createRoutesFromElements(
   <Route path="/" element={<App />}>
@@ -14,6 +15,7 @@ const routes = createRoutesFromElements(
     <Route path="/about" element={<About />} />
     <Route path="/services" element={<Services />} />
     <Route path="/projects" element={<Projects />} />
+    <Route path="/test" element={<Test />} />
   </Route>
 );
 

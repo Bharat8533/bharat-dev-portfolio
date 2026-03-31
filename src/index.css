@@ -2,12 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+/* Import High-Contrast Serif and Clean Sans-Serif */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,soft@9..144,900,100&family=Plus+Jakarta+Sans:wght@300;800&display=swap');
 
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #fff;
+}
+
+.font-brand {
+  font-family: 'Fraunces', serif;
+  font-variation-settings: "SOFT" 100;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px #000;
 }
 
 .logo{
   font-family: "Kaushan Script", cursive;
   font-weight: 400;
   font-style: normal;
+}
+
+.nav-icon {
+  @apply text-gray-400 hover:text-black transition-colors duration-300 transform hover:scale-110;
+}
+
+/* Full Screen Menu Overlay */
+.menu-overlay {
+  @apply fixed inset-0 bg-black text-white z-[2000] flex flex-col items-center justify-center translate-y-[-100%] transition-transform duration-700 ease-[cubic-bezier(0.85,0,0.15,1)];
+}
+
+.menu-overlay.active {
+  @apply translate-y-0;
 }
