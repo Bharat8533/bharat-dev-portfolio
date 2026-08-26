@@ -2,24 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import {createBrowserRouter, createRoutesFromElements, RouterProvider, Routes,Route} from 'react-router-dom';
-import Home from './pages/Home'
-import About from './pages/About'
-import Projects from './pages/Projects'
-import Services from './pages/Services'
-import Test from './pages/Test.jsx';
+import {createBrowserRouter, createRoutesFromElements, RouterProvider,Route} from 'react-router-dom';
 
 const routes = createRoutesFromElements(
-  <Route path="/" element={<App />}>
-    <Route index element={<Home />} /> {/* Default route for "/" */}
-    <Route path="/about" element={<About />} />
-    <Route path="/services" element={<Services />} />
-    <Route path="/projects" element={<Projects />} />
-    <Route path="/test" element={<Test />} />
-  </Route>
+  <Route path="/" element={<App/>} />
 );
 
-// Create the router with routes
 const router = createBrowserRouter(routes);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

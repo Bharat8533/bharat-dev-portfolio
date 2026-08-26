@@ -1,68 +1,75 @@
-import React, {useRef, useLayoutEffect} from "react";
+import React, { useRef, useLayoutEffect } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 import gsap from "gsap";
 
 const Hero = () => {
   const scope = useRef(null);
- const splitText = (text) => {
-   return text.split("").map((char, i) => (
-     <span key={i} className="letter inline-block transform-gpu">
-       {char === " " ? "\u00A0" : char}
-     </span>
-   ));
- };
+  const splitText = (text) => {
+    return text.split("").map((char, i) => (
+      <span key={i} className="letter inline-block transform-gpu">
+        {char === " " ? "\u00A0" : char}
+      </span>
+    ));
+  };
 
 
-useLayoutEffect(() => {
-  const ctx = gsap.context(() => {
-    const letters = gsap.utils.toArray(".letter");
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const letters = gsap.utils.toArray(".letter");
 
-    gsap.from(letters, {
-      duration: 1.5,
-      opacity: 0,
-      // Randomized 3D start positions
-      x: () => Math.floor(Math.random() * 200) - 100,
-      y: () => Math.floor(Math.random() * 200) - 100,
-      z: () => Math.floor(Math.random() * 500) - 250,
-      rotate: () => Math.floor(Math.random() * 90) - 45,
-      rotateX: () => Math.floor(Math.random() * 180) - 90,
-      rotateY: () => Math.floor(Math.random() * 180) - 90,
+      gsap.from(letters, {
+        duration: 1.5,
+        opacity: 0,
+        // Randomized 3D start positions
+        x: () => Math.floor(Math.random() * 200) - 100,
+        y: () => Math.floor(Math.random() * 200) - 100,
+        z: () => Math.floor(Math.random() * 500) - 250,
+        rotate: () => Math.floor(Math.random() * 90) - 45,
+        rotateX: () => Math.floor(Math.random() * 180) - 90,
+        rotateY: () => Math.floor(Math.random() * 180) - 90,
 
-      stagger: {
-        each: 0.05,
-        from: "random", // Letters reveal in random order
-      },
-      ease: "expo.out",
-      delay: 0.3,
-    });
-
-    // 2. HOVER REACTION: Make letters "jitter" or bounce when hovered
-    letters.forEach((letter) => {
-      letter.addEventListener("mouseenter", () => {
-        gsap.to(letter, {
-          y: -20,
-          rotateX: 20,
-          color: "#9333ea",
-          duration: 0.3,
-          ease: "back.out(3)",
-        });
+        stagger: {
+          each: 0.05,
+          from: "random", // Letters reveal in random order
+        },
+        ease: "expo.out",
+        delay: 0.3,
       });
 
-      letter.addEventListener("mouseleave", () => {
-        gsap.to(letter, {
-          y: 0,
-          rotateX: 0,
-          color: "inherit",
-          duration: 0.5,
-          ease: "elastic.out(1, 0.3)",
+      // 2. HOVER REACTION: Make letters "jitter" or bounce when hovered
+      letters.forEach((letter) => {
+        letter.addEventListener("mouseenter", () => {
+          gsap.to(letter, {
+            y: -20,
+            rotateX: 20,
+            color: "#9333ea",
+            duration: 0.3,
+            ease: "back.out(3)",
+          });
+        });
+
+        letter.addEventListener("mouseleave", () => {
+          gsap.to(letter, {
+            y: 0,
+            rotateX: 0,
+            color: "inherit",
+            duration: 0.5,
+            ease: "elastic.out(1, 0.3)",
+          });
         });
       });
-    });
-  }, scope);
+    }, scope);
 
-  return () => ctx.revert();
-}, []);
+    return () => ctx.revert();
+  }, []);
 
+  const downloadResume = () => {
+    const link = document.createElement('a');
+    link.href = "https://drive.google.com/file/d/1Qw3P3UdqRknz_iFoA6t3_HFRFVBuE7nG/view?usp=sharing";
+    link.download = "Bharat-Sharma-Resume.pdf";
+    link.target = "_blank";
+    link.click();
+  }
 
   return (
     <div
@@ -71,9 +78,9 @@ useLayoutEffect(() => {
     >
       <div className="absolute inset-0 z-10 pointer-events-none">
         {/* Left Vertical Spine */}
-        <div className="absolute left-[6%] md:left-[8%] h-full w-[1px] bg-black/10 flex flex-col justify-between py-12 items-center top-20">
+        <div className="hidden md:flex absolute left-[4%] lg:left-[8%] h-full w-[1px] bg-black/10 flex-col justify-between py-12 items-center top-20">
           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-black/20">
-            2026
+            {new Date().getFullYear()}
           </span>
           <span className="rotate-[-90deg] whitespace-nowrap text-[8px] font-black uppercase tracking-[1.2em] text-black">
             Crafting Digital Identities
@@ -83,8 +90,8 @@ useLayoutEffect(() => {
           </span>
         </div>
 
-        {/* Right Vertical Spine (The Balanced Counter-part) */}
-        <div className="absolute right-[6%] md:right-[8%] h-full w-[1px] bg-black/10 flex flex-col justify-end py-12 items-center">
+        {/* Right Vertical Spine */}
+        <div className="hidden md:flex absolute right-[4%] lg:right-[8%] h-full w-[1px] bg-black/10 flex-col justify-end py-12 items-center">
           <div className="flex flex-col gap-8 items-center">
             <span className="rotate-90 whitespace-nowrap text-[8px] font-bold uppercase tracking-[0.5em] text-black/80">
               Available for Hire
@@ -92,15 +99,15 @@ useLayoutEffect(() => {
           </div>
         </div>
 
-        {/* Top Horizontal Rule (Optional: adds a blueprint feel) */}
+        {/* Top Horizontal Rule */}
         <div className="absolute top-[12%] left-0 w-full h-[1px] bg-black/[0.09]" />
       </div>
 
       {/* --- MAIN CONTENT --- */}
-      <main className="relative z-20 pt-32 pb-20 flex flex-col items-center">
+      <main className="relative z-20 pt-24 sm:pt-32 pb-16 md:pb-20 flex flex-col items-center px-4 sm:px-6">
         {/* Intro Text with Mask */}
-        <div className="mb-10 overflow-hidden">
-          <p className="text-lg md:text-xl font-medium text-black tracking-tight animate-slide-up">
+        <div className="mb-6 sm:mb-10 overflow-hidden text-center">
+          <p className="text-base sm:text-lg md:text-xl font-medium text-black tracking-tight animate-slide-up">
             👋 Hi, My name is{" "}
             <span className="text-black font-bold">Bharat Sharma</span> and I am
             a freelance
@@ -108,58 +115,58 @@ useLayoutEffect(() => {
         </div>
 
         {/* HERO TYPOGRAPHY */}
-        <div className="w-full max-w-[1800px] px-4 flex flex-col items-center relative group">
-          <h1 className="text-[14vw] md:text-[12rem] font-[1000] leading-[0.8] tracking-tighter uppercase transition-all duration-700 hover:skew-x-[-5deg]">
-            {splitText("webdeveloper")}
+        <div className="w-full max-w-[1800px] px-2 sm:px-4 flex flex-col items-center relative group">
+          <h1 className="text-[11vw] sm:text-[12vw] md:text-[10rem] lg:text-[12rem] font-[1000] leading-[0.85] tracking-tighter uppercase transition-all duration-700 hover:skew-x-[-3deg] text-center break-words">
+            {splitText("Fullstack")}
+            <span className="text-purple-600"> & </span>
           </h1>
 
-          <div className="relative mt-2 md:mt-6">
-            <h1 className="text-[14vw] md:text-[13rem] font-[1000] leading-[0.8] tracking-tighter uppercase text-black stroke-text group-hover:text-black transition-all duration-1000 text-center">
-              <span className="text-purple-600"> & </span>
-              {splitText("frontend")}
+          <div className="relative mt-2 sm:mt-4 md:mt-6">
+            <h1 className="text-[11vw] sm:text-[12vw] md:text-[11rem] lg:text-[13rem] font-[1000] leading-[0.85] tracking-tighter uppercase text-black stroke-text group-hover:text-black transition-all duration-1000 text-center break-words">
+              {splitText("Developer")}
             </h1>
-            {/* The Floating Arrow is now integrated closer to the text */}
-            <div className="absolute -right-4 md:-right-20 top-0 w-16 h-16 md:w-24 md:h-24 bg-black text-white rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-500 cursor-pointer shadow-2xl scale-0 group-hover:scale-100 origin-bottom-left">
-              <FiArrowUpRight className="text-4xl" />
+            {/* Floating Arrow */}
+            <div className="absolute -right-2 sm:-right-6 md:-right-20 top-0 w-10 h-10 sm:w-16 sm:h-16 md:w-24 md:h-24 bg-black text-white rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-all duration-500 cursor-pointer shadow-2xl scale-0 group-hover:scale-100 origin-bottom-left">
+              <FiArrowUpRight className="text-xl sm:text-3xl md:text-4xl" />
             </div>
           </div>
         </div>
 
-        {/* CTA SECTION */}
         {/* --- BALANCED ACTIONS & BIO SECTION --- */}
-        <div className="w-full max-w-[1400px] mt-20 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-5 items-start gap-12">
-          {/* 1. LEFT COLUMN: Intentional Empty Space */}
-          <div className="hidden lg:block">
-            {/* This space stays empty to drive focus to the center */}
-          </div>
+        <div className="w-full max-w-[1400px] mt-12 sm:mt-16 md:mt-20 px-2 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-5 items-start gap-8 lg:gap-12">
+          {/* 1. LEFT COLUMN */}
+          <div className="hidden lg:block"></div>
 
-          {/* 2. MIDDLE COLUMN: The Action Center */}
-          <div className="col-span-2 flex flex-col w-full items-center h-full">
-            <div className="flex gap-4 flex-col sm:flex-row items-top">
-              <button className="relative px-10 py-5 overflow-hidden group rounded-sm border border-black transition-all hover:text-white w-full sm:w-auto text-center h-fit hover:border-purple-600">
-                <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.3em]">
+          {/* 2. MIDDLE COLUMN: Action Center */}
+          <div className="col-span-1 lg:col-span-2 flex flex-col w-full items-center h-full">
+            <div className="flex gap-3 sm:gap-4 flex-col sm:flex-row items-center w-full justify-center">
+              <button
+                onClick={() => downloadResume()}
+                className="relative px-6 py-4 sm:px-10 sm:py-5 overflow-hidden group rounded-sm border border-black transition-all hover:text-white w-full sm:w-auto text-center h-fit hover:border-purple-600 active:scale-95"
+              >
+                <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.25em]">
                   Download Resume
                 </span>
                 <div className="absolute inset-0 bg-purple-600 translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out" />
               </button>
 
-              <button className="px-10 py-6 bg-black text-white text-[10px] font-black uppercase tracking-[0.3em] hover:bg-purple-600 transition-all shadow-xl active:scale-95 w-full sm:w-auto text-center h-fit border rounded-sm border-black hover:border-purple-600">
+              <a
+                href="#footer"
+                className="px-6 py-4 sm:px-10 sm:py-5 bg-black text-white text-[10px] font-black uppercase tracking-[0.25em] hover:bg-purple-600 transition-all shadow-xl active:scale-95 w-full sm:w-auto text-center h-fit border rounded-sm border-black hover:border-purple-600 inline-block"
+              >
                 Contact Me!
-              </button>
+              </a>
             </div>
 
-            <div className="group relative w-24 h-24 mt-12 rounded-full border border-black flex justify-center items-center text-4xl text-black overflow-hidden cursor-pointer transition-colors duration-500">
-              {/* The Background Fill Layer */}
+            <div className="group relative w-16 h-16 sm:w-24 sm:h-24 mt-8 sm:mt-12 rounded-full border border-black flex justify-center items-center text-2xl sm:text-4xl text-black overflow-hidden cursor-pointer transition-colors duration-500">
               <div className="absolute inset-0 bg-purple-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
-
-              {/* The Arrow Icon */}
               <FiArrowUpRight className="relative z-10 rotate-[135deg] group-hover:text-white transition-all duration-500 ease-out" />
             </div>
           </div>
 
-          {/* 3. RIGHT COLUMN: The About Brief */}
+          {/* 3. RIGHT COLUMN: About Brief */}
           <div
-            className="col-span-2 flex flex-col gap-6 animate-slide-up"
+            className="col-span-1 lg:col-span-2 flex flex-col gap-6 animate-slide-up"
             style={{ animationDelay: "0.2s" }}
           >
             <div className="space-y-4">
@@ -170,7 +177,7 @@ useLayoutEffect(() => {
                 <div className="h-[1px] w-full bg-black/10" />
               </div>
 
-              <p className="text-[13px] md:text-[14px] leading-[1.8] text-black/80 tracking-tight font-medium text-justify">
+              <p className="text-[13px] md:text-[14px] leading-[1.8] text-black/80 tracking-tight font-medium text-left sm:text-justify">
                 <span className="text-black font-bold">
                   A software developer
                 </span>{" "}
@@ -187,13 +194,11 @@ useLayoutEffect(() => {
                   AI-driven automation
                 </span>{" "}
                 to streamline workflows and enhance application efficiency.
-                Passionate about continuous learning, I enjoy collaborating with
-                teams to transform innovative ideas into high-quality products.
               </p>
             </div>
 
             {/* Metadata Footer */}
-            <div className="flex items-center justify-between border-t border-black/5">
+            <div className="flex items-center justify-between border-t border-black/5 pt-4">
               <div className="flex flex-col gap-1">
                 <span className="text-[10px] font-black uppercase tracking-widest text-black/90">
                   Location

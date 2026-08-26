@@ -123,31 +123,35 @@ const SkillsSection = () => {
     window.removeEventListener("mouseup", handleMouseUp);
   };
 
+  const handleTouchStart = (e, skillName) => {
+    const touch = e.touches[0];
+    handleMouseDown({ currentTarget: e.currentTarget, clientX: touch.clientX, clientY: touch.clientY }, skillName);
+  };
+
   return (
-    <section ref={containerRef} className="w-full px-6 md:px-12">
-      <div className="mb-12">
-        <h2 className="text-6xl md:text-8xl uppercase font-black leading-none font-sans">
+    <section ref={containerRef} className="w-full px-4 sm:px-6 md:px-12 py-12 sm:py-16">
+      <div className="mb-8 sm:mb-12">
+        <h2 className="text-4xl sm:text-6xl md:text-8xl uppercase font-black leading-none font-sans">
           Ski<span className="text-purple-600">ll</span>s.
         </h2>
-        <p className="max-w-2xl text-gray-600 text-lg md:text-xl mt-6">
+        <p className="max-w-2xl text-gray-600 text-base sm:text-lg md:text-xl mt-4 sm:mt-6">
           Bridging the gap between robust backend logic and pixel-perfect
           frontend interactivity. Here is my technical arsenal.
         </p>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-3  mb-8">
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setActiveTab(cat)}
-            className={`group relative px-12 py-4 rounded-sm font-bold uppercase tracking-tighter transition-all duration-300
+            className={`group relative px-4 py-2.5 sm:px-8 sm:py-3 md:px-12 md:py-4 rounded-sm font-bold uppercase text-xs sm:text-sm tracking-tighter transition-all duration-300
               ${
                 activeTab === cat
                   ? "text-white border-purple-600"
                   : "text-purple-600 border-purple-600/50 hover:border-purple-600 hover:text-purple-600"
               } border bg-white/5 backdrop-blur-sm overflow-hidden`}
           >
-            {/* Background fill animation */}
             <div
               className={`absolute inset-0 bg-purple-600 transition-transform duration-300 -z-10 ${activeTab === cat ? "translate-y-0" : "translate-y-full group-hover:translate-y-[90%]"}`}
             />
@@ -156,30 +160,30 @@ const SkillsSection = () => {
         ))}
       </div>
 
-      <div className="w-[80%] mx-auto h-[1px] bg-gradient-to-r from-transparent via-purple-600 to-transparent mb-12 "></div>
+      <div className="w-[90%] sm:w-[80%] mx-auto h-[1px] bg-gradient-to-r from-transparent via-purple-600 to-transparent mb-8 sm:mb-12"></div>
 
-      <div className="flex flex-wrap gap-4 max-h-[40dvh] items-end justify-center relative rounded-xl max-w-[80%] mx-auto">
+      <div className="flex flex-wrap gap-2 sm:gap-4 items-center justify-center relative rounded-xl max-w-full md:max-w-[85%] mx-auto py-4 min-h-[200px]">
         {filteredSkills.map((skill, i) => {
-          const randomRotation = Math.floor(Math.random() * 30) - 15;
-          const randomX = Math.floor(Math.random() * 20) - 10;
-          const randomY = Math.floor(Math.random() * 20) - 10;
+          const randomRotation = Math.floor(Math.random() * 20) - 10;
+          const randomX = Math.floor(Math.random() * 16) - 8;
+          const randomY = Math.floor(Math.random() * 16) - 8;
           const randomZ = Math.floor(Math.random() * 50);
 
           return (
             <div
               key={skill.name}
               onMouseDown={(e) => handleMouseDown(e, skill.name)}
-              className="skill-card group relative overflow-hidden px-8 py-4 h-16 border rounded-xl bg-purple-600 text-white hover:border-purple-500 transition-colors duration-300 cursor-pointer"
+              onTouchStart={(e) => handleTouchStart(e, skill.name)}
+              className="skill-card group relative overflow-hidden px-4 py-2.5 sm:px-8 sm:py-4 h-12 sm:h-16 border rounded-xl bg-purple-600 text-white hover:border-purple-500 transition-colors duration-300 cursor-grab active:cursor-grabbing select-none"
               style={{
                 transform: `rotate(${randomRotation}deg) translate(${randomX}px, ${randomY}px)`,
                 zIndex: randomZ,
-                margin: "-5px", // This forces the overlap
+                margin: "-3px",
               }}
             >
-              {/* Animated Background Overlay */}
               <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out -z-10" />
 
-              <span className="text-lg md:text-xl font-medium group-hover:text-purple-600 transition-colors">
+              <span className="text-sm sm:text-lg md:text-xl font-medium group-hover:text-purple-600 transition-colors whitespace-nowrap">
                 {skill.name}
               </span>
             </div>

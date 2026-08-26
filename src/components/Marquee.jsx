@@ -35,12 +35,12 @@ const Marquee = () => {
   }, []);
 
   return (
-    <div className="w-[120%] -translate-y-10 -translate-x-10 rotate-[8deg] h-32 bg-purple-600 overflow-hidden flex items-center relative border-y border-black/10">
+    <div className="w-[120%] -translate-y-6 sm:-translate-y-10 -translate-x-5 sm:-translate-x-10 rotate-[4deg] md:rotate-[8deg] h-20 sm:h-24 md:h-32 bg-purple-600 overflow-hidden flex items-center relative border-y border-black/10 my-8 sm:my-12">
       <div
         ref={scrollingText}
         className="flex whitespace-nowrap will-change-transform"
       >
-        <div className="flex gap-12 text-5xl uppercase text-white px-6 font-[1000] tracking-tighter">
+        <div className="flex gap-6 sm:gap-12 text-2xl sm:text-3xl md:text-5xl uppercase text-white px-3 sm:px-6 font-[1000] tracking-tighter">
           <span>Web Developer</span>
           <span>●</span>
           <span>UI/UX Designer</span>
@@ -50,7 +50,7 @@ const Marquee = () => {
           <span>Available 2026</span>
           <span>●</span>
         </div>
-        <div className="flex gap-12 text-5xl uppercase text-white px-6 font-[1000] tracking-tighter">
+        <div className="flex gap-6 sm:gap-12 text-2xl sm:text-3xl md:text-5xl uppercase text-white px-3 sm:px-6 font-[1000] tracking-tighter">
           <span>Web Developer</span>
           <span>●</span>
           <span>UI/UX Designer</span>
